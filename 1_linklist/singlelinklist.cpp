@@ -1,0 +1,171 @@
+#include "singlelinklist.h"
+#include "widget.h"
+
+//单链表
+SingleLinkList::SingleLinkList(Widget* widget)//构造函数，生成空头节点
+{
+    head = new(nothrow)SNode;
+    if (head == NULL)
+        exit(EXIT_FAILURE);
+    head->data = 0;
+    head->next = NULL;
+    length = 0;
+    main_widget=widget;
+    show();
+}
+
+void SingleLinkList::insertAtIndex(int index, int val)//在索引index处插入值为val的元素
+{
+    if (index > length || index < 0)
+    {
+        main_widget->SetTextBrowser("索引位置不正确，插入节点失败！");
+        main_widget->SetStatus(2);
+        return;
+    }
+    SNode* p = head;
+    for (int i = 0; i < index; i++)
+    {
+        p = p->next;
+        main_widget->SetTextBrowser("正在索引第"+QString::number(i)+"项");
+    }
+    SNode* new_node = new(nothrow)SNode;//插入新节点
+    if (new_node == NULL)
+        exit(EXIT_FAILURE);
+    new_node->data = val;
+    new_node->next = p->next;
+    p->next = new_node;
+    length++;
+    main_widget->SetTextBrowser("在"+QString::number(index)+"处插入元素值为"+QString::number(val)+"的节点成功！");
+    show();
+    main_widget->SetStatus(2);
+    return;
+}
+
+void SingleLinkList::deleteAtIndex(int index)//删除索引index处的节点
+{
+    if (index < 0 || index >= length)
+    {
+        main_widget->SetTextBrowser("索引位置不正确，删除节点失败！");
+        main_widget->SetStatus(2);
+        return;
+    }
+    SNode* p = head;
+    for (int i = 0; i < index; i++)
+    {
+        p = p->next;
+        main_widget->SetTextBrowser("正在索引第"+QString::number(i)+"项");
+    }
+    SNode* q = p->next;
+    p->next = q->next;
+    delete q;
+    length--;
+    main_widget->SetTextBrowser("删除索引"+QString::number(index)+"处的节点成功！");
+    show();
+    main_widget->SetStatus(2);
+    return;
+}
+
+void SingleLinkList::modifyAtIndex(int index, int val)//将索引index处节点的元素值修改为val
+{
+    if (index < 0 || index >= length)
+    {
+        main_widget->SetTextBrowser("索引位置不正确，修改节点失败！");
+        main_widget->SetStatus(2);
+        return;
+    }
+    SNode* p = head->next;
+    for (int i = 0; i < index; i++)
+    {
+        p = p->next;
+        main_widget->SetTextBrowser("正在索引第"+QString::number(i)+"项");
+    }
+    p->data = val;
+    main_widget->SetTextBrowser("修改索引"+QString::number(index)+"处节点的元素值为"+QString::number(val)+"成功！");
+    show();
+    main_widget->SetStatus(2);
+    return;
+}
+
+int SingleLinkList::searchWithVal(int val)//按值查找元素，返回索引
+{
+    SNode* p = head->next;
+    int index=0;
+    while (p != NULL)
+    {
+        if (p->data == val)
+        {
+            main_widget->SetTextBrowser("值为"+QString::number(val)+"对应元素索引为"+QString::number(index));
+            main_widget->SetStatus(2);
+            return p - head->next;
+        }
+        p = p->next;
+        index++;
+    }
+    main_widget->SetTextBrowser("元素不存在，查找失败！");
+    main_widget->SetStatus(2);
+    return -1;
+}
+
+void SingleLinkList::show()//展示链表元素
+{
+    main_widget->ClearTableWidget();
+    main_widget->SetTableWidget(0,0,"head");
+    QString elements="当前列表中的内容为：";
+    if (length == 0)
+    {
+        elements=elements+"空";
+        main_widget->SetTextBrowser(elements);
+        main_widget->SetStatus(2);
+        return;
+    }
+    int i=0;
+    int j=0;
+    SNode* p = head->next;
+    while (p != NULL)
+    {
+        if(j==3)
+        {
+            i++;
+            j=0;
+        }
+        else
+            j++;
+        elements=elements+QString::number(p->data)+" ";
+        //在画布上展示元素的值
+        main_widget->SetTableWidget(i,j,QString::number(p->data));
+        p = p->next;
+    }
+    main_widget->SetTextBrowser(elements);
+    main_widget->SetStatus(2);
+    return;
+}
+
+//销毁链表
+void SingleLinkList::destroylinklist()
+{
+    if(head==NULL)
+        return;
+    SNode* p = head->next;
+    while (p != NULL)
+    {
+        SNode* q = p;
+        p = p->next;
+        delete q;
+    }
+    delete head;
+}
+
+//析构函数
+SingleLinkList::~SingleLinkList()
+{
+    if(head==NULL)
+        return;
+    SNode* p = head->next;
+    while (p != NULL)
+    {
+        SNode* q = p;
+        p = p->next;
+        delete q;
+    }
+    delete head;
+}

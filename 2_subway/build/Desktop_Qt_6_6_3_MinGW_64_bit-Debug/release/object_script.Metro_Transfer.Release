@@ -1,0 +1,12 @@
+release/graphicsviewzoom.o
+release/help.o
+release/line.o
+release/main.o
+release/mainwindow.o
+release/metroaddition.o
+release/metrosystem.o
+release/station.o
+release/moc_graphicsviewzoom.o
+release/moc_help.o
+release/moc_mainwindow.o
+release/moc_metroaddition.o
