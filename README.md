@@ -6,6 +6,8 @@ The Shanghai Metro Transfer Guide System is a full-featured desktop application 
 
 With over a dozen lines and hundreds of stations, Shanghai’s metro system demands efficient route planning. This project applies classical graph algorithms and a custom-built data structure to deliver clear, user‑friendly navigation guidance, complete with graphical path display and real‑time network updates.
 
+<img width="556" height="318" alt="image" src="https://github.com/user-attachments/assets/fcba28b1-3d21-4e61-8a98-87d2fe5a2a09" />
+
 ## Tech Stack  
 | Layer          | Technology                                              |
 |----------------|---------------------------------------------------------|
@@ -51,6 +53,10 @@ text
 **Route: Tongji University → Pudong International Airport**  
 - *Minimum transfers*: 2 transfers (Line 10 → Line 2 → Maglev)  
 - *Minimum time*: 1 transfer (Line 10 → Line 2) – faster due to direct connection.
+
+<img width="555" height="361" alt="image" src="https://github.com/user-attachments/assets/f50fc34d-0c95-4004-9f47-eb0b346140ef" />
+
+<img width="555" height="361" alt="image" src="https://github.com/user-attachments/assets/5e5fb7e9-11ed-48a5-a1c5-1863da68d5d5" />
 
 **Dynamic Addition**  
 - Adding a new station “Huangdu” and connecting it to “Changji East Road” instantly updates the graph and map.
