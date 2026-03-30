@@ -25,6 +25,7 @@ With over a dozen lines and hundreds of stations, Shanghai’s metro system dema
 - ✅ **Input Validation** – Checks for non‑existent stations, duplicate entries, and invalid connections with clear error messages.
 
 ## System Architecture  
+```
 User Input (Qt UI) ──► MetroSystem (Graph Model)
 │
 ▼
@@ -32,6 +33,7 @@ Route Calculation Engine (Dijkstra / BFS)
 │
 ▼
 Path Visualization (Qt Graphics View)
+```
 
 text
 - **MetroSystem** – Central class that stores all stations (vertices) and lines (edges). Each station records its name, coordinates, and the lines passing through it. Each line stores its stations in order, its color, and name.
